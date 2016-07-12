@@ -1,0 +1,26 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <declare-styleable name="BubbleWidget">
+        <!--左上角三角形的高-->
+        <attr name="triangle_length" format="dimension"/>
+        <!--圆角矩形的圆角角度-->
+        <attr name="bradius" format="dimension"/>
+        <attr name="bg_color_nopressed" format="color"/>
+        <attr name="bg_color_pressed" format="color"/>
+        <!--气泡内边距-->
+        <attr name="bpaddingleft" format="dimension"/>
+        <attr name="bpaddingright" format="dimension"/>
+        <attr name="bpaddingtop" format="dimension"/>
+        <attr name="bpaddingbottom" format="dimension"/>
+        <attr name="bpadding" format="dimension"/>
+    </declare-styleable>
+
+</resources>

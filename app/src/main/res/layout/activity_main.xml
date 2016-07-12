@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="horizontal"
+    tools:context="com.sf.bgtest.MainActivity">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+   <Button
+       android:text="增加padding"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:onClick="addPadding"
+       />
+    <Button
+        android:text="改变大小"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeSize"
+        />
+
+    <Button
+        android:text="改变气泡内边距"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changBPadding"
+        />
+
+    <Button
+        android:text="添加view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="addView"
+        />
+
+    <Button
+        android:text="删除view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="removeView" />
+
+    <Button
+        android:text="改变背景色"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changColor"
+        />
+
+    <Button
+        android:text="改变三角形高度"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changHTriangle"
+        />
+
+    <Button
+        android:text="改变圆角角度"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changRadius"
+        />
+
+</LinearLayout>
+    <com.sf.bgtest.BubbleWidget
+        android:id="@+id/bubble"
+        app:bg_color_nopressed="#550077"
+        app:bg_color_pressed="#fff321"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+     <LinearLayout
+         android:id="@+id/layout_content"
+         android:orientation="horizontal"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content">
+
+
+         <Button
+             android:text="ceshi1faafa"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             />
+
+     </LinearLayout>
+
+    </com.sf.bgtest.BubbleWidget>
+
+
+</LinearLayout>

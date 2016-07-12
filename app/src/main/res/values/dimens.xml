@@ -1,0 +1,11 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--气泡相关属性-->
+    <!--气泡左上角的等腰三角形的默认腰长-->
+    <dimen name="default_bubble_length_of_triangle">11dp</dimen>
+    <!--气派圆角矩形的圆角角度的默认值-->
+    <dimen name="default_bubble_roundRect_radius">13dp</dimen>
+</resources>

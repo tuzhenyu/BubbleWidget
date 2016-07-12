@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="red">#ffff0000</color>
+    <color name="headline_yellow">#ffffc926</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_white">#00ffffff</color>
+    <color name="sending">#3398da</color>
+    <color name="send_fail">#e64c3b</color>
+    <color name="text_color">#D5D6D8</color>
+    <color name="sectionbg">#ffaabbcc</color>
+    <color name="gray">#666666</color>
+    <color name="bg_color">#EEEEEE</color>
+    <color name="list_bg_color">#F8F9FA</color>
+    <color name="title_bottom_line_color">#FFC4C4C4</color>
+    <color name="letter_gray">#D8D8D8</color>
+    <color name="bg_blue">#51b9db</color>
+    <color name="left_color_transparent">#33000000</color>
+    <color name="bottom_menu_text_color">#FF0080FF</color>
+    <color name="swipe_yellow">#ffde47</color>
+    <color name="swipe_time_over">#e93f27</color>
+    <color name="swipe_time_not_over">#aaaaaa</color>
+    <color name="window_backgroud_color">#00ffffff</color>
+    <color name="listview_section_bg">#F6F8FA</color>
+    <color name="CFDE1D0">#FDE1D0</color>
+    <color name="C999999">#999999</color>
+    <color name="C324C81">#324C81</color>
+    <color name="C555555">#555555</color>
+    <color name="EB5A39">#EB5A39</color>
+    <!--表单特殊行 用在退出，解散，删除-->
+    <color name="FF4000">#FF4000</color>
+    <color name="form_quit">@color/FF4000</color>
+    <color name="form_delete">@color/FF4000</color>
+    <color name="form_disband">@color/FF4000</color>
+    <!-- activity界面背景色 -->
+    <color name="activity_bg">#EEEEEE</color>
+    <color name="cache_color_hint">#00000000</color>
+
+    <!--气泡默认背景色-->
+    <color name="default_color_bubble_bg">#f4f4f4</color>
+</resources>

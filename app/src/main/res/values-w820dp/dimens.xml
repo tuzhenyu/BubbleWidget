@@ -1,0 +1,12 @@
+<resources>
+    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
+         (such as screen margins) for screens with more than 820dp of available width. This
+         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
+    <dimen name="activity_horizontal_margin">64dp</dimen>
+
+    <!--气泡相关属性-->
+    <!--气泡左上角的等腰三角形的默认腰长-->
+    <dimen name="default_bubble_length_of_triangle">11dp</dimen>
+    <!--气派圆角矩形的圆角角度的默认值-->
+    <dimen name="default_bubble_roundRect_radius">13dp</dimen>
+</resources>
