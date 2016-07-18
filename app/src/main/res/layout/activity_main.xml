@@ -79,13 +79,14 @@
         app:bg_color_pressed="#fff321"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:bpadding="12dp"
         >
 
      <LinearLayout
          android:id="@+id/layout_content"
          android:orientation="horizontal"
          android:layout_width="wrap_content"
-         android:layout_height="wrap_content">
+         android:layout_height="match_parent">
 
 
          <Button

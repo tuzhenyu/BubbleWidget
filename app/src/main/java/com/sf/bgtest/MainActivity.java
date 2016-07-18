@@ -9,13 +9,13 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 
-    ViewGroup viewGroup ;
+    ViewGroup content;
     BubbleWidget bubbleWidget;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        viewGroup = (ViewGroup) findViewById(R.id.layout_content);
+        content = (ViewGroup) findViewById(R.id.layout_content);
         bubbleWidget = (BubbleWidget) findViewById(R.id.bubble);
     }
 
@@ -63,12 +63,14 @@ public class MainActivity extends Activity {
     public void addView (View v){
         ImageView imageView = new ImageView(this);
         imageView.setImageResource(R.drawable.app_launcher);
-        viewGroup.addView(imageView);
+        content.addView(imageView);
     }
 
 
     public void removeView (View v){
-        bubbleWidget.removeViewAt(0);
+        if(content.getChildCount() > 0){
+            content.removeViewAt(0);
+        }
     }
 
     int indexC = 0;

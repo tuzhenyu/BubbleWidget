@@ -49,6 +49,7 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
     }
 
     private void initConfig(Context context, AttributeSet attrs){
+        setClickable(true);
         getViewTreeObserver().addOnGlobalLayoutListener(this);
         mBackGroundConfig = new BackGroundConfig(context);
         if(attrs != null){
