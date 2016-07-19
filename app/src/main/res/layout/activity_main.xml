@@ -84,17 +84,17 @@
 
      <LinearLayout
          android:id="@+id/layout_content"
-         android:orientation="horizontal"
+         android:orientation="vertical"
          android:layout_width="wrap_content"
          android:layout_height="match_parent">
 
 
-         <Button
+      <!--   <Button
              android:text="ceshi1faafa"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              />
-
+-->
      </LinearLayout>
 
     </com.sf.bgtest.BubbleWidget>

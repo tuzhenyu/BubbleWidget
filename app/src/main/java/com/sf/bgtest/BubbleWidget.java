@@ -28,6 +28,9 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
         return mBackGroundConfig;
     }
 
+    private int oldWith = 0;
+    private int oldHeight = 0;
+
     public void setmBackGroundConfig(BackGroundConfig mBackGroundConfig) {
         this.mBackGroundConfig = mBackGroundConfig;
         setBubbleDrawable();
@@ -135,8 +138,39 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
 
     @Override
     public void onGlobalLayout() {
-        setBubbleDrawable();
-        setBPadding(mBackGroundConfig);
+
+        if(oldWith != getMeasuredWidth() || oldHeight != getMeasuredHeight()){
+
+            oldWith = getMeasuredWidth();
+            oldHeight = getMeasuredHeight();
+
+            setBubbleDrawable();
+            setBPadding(mBackGroundConfig);
+        }
+
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int w = getMeasuredWidth();
+        int h = getMeasuredHeight();
+
+        if(w == (getPaddingLeft() + getPaddingRight()) &&//说明子布局为大小为0
+              h == (getPaddingBottom() + getPaddingTop())){
+            setMeasuredDimension(0,0);
+        }
+    }
+
+    @Override
+    protected int getSuggestedMinimumHeight() {
+        return getMinimumHeight();
+    }
+
+
+    @Override
+    protected int getSuggestedMinimumWidth() {
+        return getMinimumHeight();
     }
 
     public void setBPadding(BackGroundConfig backGroundConfig){
