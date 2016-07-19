@@ -11,6 +11,7 @@ public class MainActivity extends Activity {
 
     ViewGroup content;
     BubbleWidget bubbleWidget;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

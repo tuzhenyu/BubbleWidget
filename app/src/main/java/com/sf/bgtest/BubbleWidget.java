@@ -3,24 +3,18 @@ package com.sf.bgtest;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 
 /**
  * 类描述：带有气泡背景的容器；并且可以动态调整气泡的尺寸属性（圆角角度，内边距，三角形高度）,背景色等。
  * Created by tzy on 2016/7/11.
  */
-public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlobalLayoutListener{
+public class BubbleWidget extends FrameLayout {
 
     private BackGroundConfig mBackGroundConfig = null;
 
@@ -28,12 +22,9 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
         return mBackGroundConfig;
     }
 
-    private int oldWith = 0;
-    private int oldHeight = 0;
-
     public void setmBackGroundConfig(BackGroundConfig mBackGroundConfig) {
         this.mBackGroundConfig = mBackGroundConfig;
-        setBubbleDrawable();
+        postInvalidate();
     }
 
     public BubbleWidget(Context context) {
@@ -53,7 +44,7 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
 
     private void initConfig(Context context, AttributeSet attrs){
         setClickable(true);
-        getViewTreeObserver().addOnGlobalLayoutListener(this);
+        setWillNotDraw(false);
         mBackGroundConfig = new BackGroundConfig(context);
         if(attrs != null){
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BubbleWidget);
@@ -77,37 +68,35 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
                 }
             }
         }
+        setBPadding(mBackGroundConfig);
     }
 
-    public StateListDrawable getStateListDrawable(){
-        int w = getMeasuredWidth();
-        int h = getMeasuredHeight();
+    @Override
+    protected void drawableStateChanged() {
+        super.drawableStateChanged();
+        invalidate();
+    }
 
-        if(w <= 0 || h <= 0){return null;}
-        Resources resources = getResources();
-        Drawable bgDrawableNoPressed = getBubbleDrawable(w,h,mBackGroundConfig.bgColorNopressed,resources);
-        Drawable bgDrawablePressed = getBubbleDrawable(w,h,mBackGroundConfig.bgColorPressed,resources);
-
-        StateListDrawable listDrawable = new StateListDrawable();
-        listDrawable.addState(new int[]{-android.R.attr.state_pressed},
-                bgDrawableNoPressed);
-        listDrawable.addState(new int[]{android.R.attr.state_pressed},
-                bgDrawablePressed);
-        return listDrawable;
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        if(isPressed()){
+            drawBubble(getMeasuredWidth(),getMeasuredHeight(),mBackGroundConfig.bgColorPressed,canvas);
+        }else{
+            drawBubble(getMeasuredWidth(),getMeasuredHeight(),mBackGroundConfig.bgColorNopressed,canvas);
+        }
     }
 
     /**
      *
-     * 获取特定颜色的drwable
+     * 绘制特定颜色的drwable
      * */
-    public Drawable getBubbleDrawable(int width, int height, int color, Resources resources){
-        Log.i("bgTest","开始绘制背景");
-        Bitmap bitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
+    public void drawBubble(int width, int height, int color, Canvas canvas){
         Paint mPaint= new Paint();
         // 在左上角绘制一个等腰三角形
         Path path = new Path();
         mPaint.reset();
+        mPaint.setAntiAlias(true);//抗锯齿功能
         mPaint.setColor(color);
         mPaint.setStyle(Paint.Style.FILL);
         path.moveTo(0, 0);// 此点为三角形的左顶点
@@ -119,35 +108,14 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
 
         //绘制绘制圆角矩形
         mPaint.reset();
+        mPaint.setAntiAlias(true);//抗锯齿功能
         mPaint.setColor(color);
         mPaint.setStyle(Paint.Style.FILL);
         int rectY = mBackGroundConfig.getLengthOfTriangle();
-        RectF oval = new RectF(0, rectY, canvas.getWidth(), canvas.getHeight());
+        RectF oval = new RectF(0, rectY, width, height);
         canvas.drawRoundRect(oval, mBackGroundConfig.radius, mBackGroundConfig.radius, mPaint);
         canvas.save(Canvas.ALL_SAVE_FLAG );
         canvas.restore();
-
-        Log.i("bgTest","绘制完成");
-        Drawable drawable =new BitmapDrawable(resources,bitmap);
-        mPaint = null;
-        canvas.setBitmap(null);
-        canvas = null;
-
-        return drawable;
-    }
-
-    @Override
-    public void onGlobalLayout() {
-
-        if(oldWith != getMeasuredWidth() || oldHeight != getMeasuredHeight()){
-
-            oldWith = getMeasuredWidth();
-            oldHeight = getMeasuredHeight();
-
-            setBubbleDrawable();
-            setBPadding(mBackGroundConfig);
-        }
-
     }
 
     @Override
@@ -160,17 +128,6 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
               h == (getPaddingBottom() + getPaddingTop())){
             setMeasuredDimension(0,0);
         }
-    }
-
-    @Override
-    protected int getSuggestedMinimumHeight() {
-        return getMinimumHeight();
-    }
-
-
-    @Override
-    protected int getSuggestedMinimumWidth() {
-        return getMinimumHeight();
     }
 
     public void setBPadding(BackGroundConfig backGroundConfig){
@@ -225,11 +182,6 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
         setBPadding(mBackGroundConfig);
     }
 
-    private void setBubbleDrawable(){
-        StateListDrawable bgStateListDrawable = getStateListDrawable();
-      /*  setBackground(bgStateListDrawable);*/
-        setBackgroundDrawable(bgStateListDrawable);
-    }
 
     /**
      * 设置静态背景
@@ -238,7 +190,7 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
     public void setStaticBackGround(int color){
         mBackGroundConfig.bgColorNopressed = color;
         mBackGroundConfig.bgColorPressed = color;
-        setBubbleDrawable();
+        invalidate();
     }
 
     /**
@@ -249,7 +201,7 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
     public void setStateBackGrounds(int noPressedColor,int pressedColor){
         mBackGroundConfig.bgColorNopressed = noPressedColor;
         mBackGroundConfig.bgColorPressed = pressedColor;
-        setBubbleDrawable();
+        invalidate();
     }
 
     /**
@@ -257,7 +209,7 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
      * */
     public void setBRadius(int px){
         mBackGroundConfig.radius = px;
-        setBubbleDrawable();
+        invalidate();
     }
 
     /**
@@ -265,7 +217,7 @@ public class BubbleWidget extends FrameLayout implements ViewTreeObserver.OnGlob
      * */
     public void setLengthOfTriangle(int length){
         mBackGroundConfig.lengthOfTriangle = length;
-        setBubbleDrawable();
+        invalidate();
     }
 
     /**
